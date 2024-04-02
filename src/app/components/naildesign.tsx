@@ -21,7 +21,7 @@ const products = [
   
 ];
 
-export default function naildesign() {
+export default function Naildesign() {
   const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
 
   const openWhatsApp = () => {
