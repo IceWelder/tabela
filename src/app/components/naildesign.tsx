@@ -18,14 +18,14 @@ const products = [
     description: 'Descrição do Produto 2',
     image: '/product2.jpg',
   },
-  // Adicione mais produtos conforme necessário
+  
 ];
 
-export default function Home() {
+export default function naildesign() {
   const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
 
   const openWhatsApp = () => {
-    const whatsappNumber = '123456789'; // Substitua pelo seu número de WhatsApp
+    const whatsappNumber = '123456789'; 
     window.open(`https://wa.me/${whatsappNumber}`, '_blank');
   };
 
@@ -77,9 +77,10 @@ export default function Home() {
       </div>
       <footer className="text-center py-2 text-xs text-black bg-rose-200 z-10">
         <div className="flex justify-center">
-          <a href="https://facebook.com" className="mx-2 text-gray-600"><FaFacebook className="text-2xl" /></a>
-          <a href="https://instagram.com" className="mx-2 text-gray-600"><FaInstagram className="text-2xl" /></a>
-          <a href="https://wa.me/123456789" className="mx-2 text-gray-600"><FaWhatsapp className="text-2xl" /></a>
+          <a href="https://facebook.com" className="mx-2 text-blue-700"><FaFacebook className="text-2xl" /></a>
+          
+          <a href="https://instagram.com" className="mx-2"><img src="/instagram-logo.svg" alt="Instagram" className="w-6 h-6" /></a>
+          <a href="https://wa.me/123456789" className="mx-2 text-green-500"><FaWhatsapp className="text-2xl" /></a>
         </div>
       </footer>
     </div>
