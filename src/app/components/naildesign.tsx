@@ -6,19 +6,68 @@ import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 const products = [
   {
     id: 1,
-    name: 'Produto 1',
-    price: 100,
-    description: 'Descrição do Produto 1',
+    category: 'Blindagem',
+    name: 'Blindagem ',
+    price: 80,
+    description: 'Descrição da Blindagem ',
     image: '/product1.jpg',
   },
   {
     id: 2,
-    name: 'Produto 2',
-    price: 150,
-    description: 'Descrição do Produto 2',
+    category: 'Blindagem',
+    name: 'Blindagem Cutilage Russa + Esmaltação em Gel ',
+    price: 80,
+    description: 'Descrição da Blindagem Cutilage Russa + Esmaltação em Gel ',
     image: '/product2.jpg',
   },
-  
+  {
+    id: 3,
+    category: 'Banho de Gel',
+    name: 'Cutilagem ',
+    price: 100,
+    description: 'Descrição da Cutilagem ',
+    image: '/product3.jpg',
+  },
+  {
+    id: 4,
+    category: 'Banho de Gel',
+    name: 'Esmaltação em Gel ',
+    price: 100,
+    description: 'Descrição da Esmaltação em Gel ',
+    image: '/product4.jpg',
+  },
+  {
+    id: 5,
+    category: 'Extensor Molde F1',
+    name: 'Cutilagem Russa ',
+    price: 170,
+    description: 'Descrição da Cutilagem Russa ',
+    image: '/product5.jpg',
+  },
+  {
+    id: 6,
+    category: 'Extensor Molde F1',
+    name: 'Esmaltação em Gel ',
+    price: 170,
+    description: 'Descrição da Esmaltação em Gel ',
+    image: '/product6.jpg',
+  },
+  {
+    id: 7,
+    category: 'Extensor Fibra',
+    name: 'Cutilagem Russa ',
+    price: 120,
+    description: 'Descrição da Cutilagem Russa ',
+    image: '/product7.jpg',
+  },
+  {
+    id: 8,
+    category: 'Extensor Fibra',
+    name: 'Esmaltação ',
+    price: 120,
+    description: 'Descrição da Esmaltação ',
+    image: '/product8.jpg',
+  },
 ];
 
 export default function Naildesign() {
@@ -29,19 +78,29 @@ export default function Naildesign() {
     window.open(`https://wa.me/${whatsappNumber}`, '_blank');
   };
 
+  // Agrupar produtos por categoria
+const groupedProducts: { [key: string]: any[] } = products.reduce<{ [key: string]: any[] }>((acc, product) => {
+  const { category, ...rest } = product;
+  acc[category] = acc[category] || [];
+  acc[category].push(rest);
+  return acc;
+}, {});
+
+
+
   return (
-    <div className="flex flex-col min-h-screen relative" style={{ backgroundColor: '#ffffff', backgroundImage: "url('/naild.jpg')", backgroundSize: "cover" }}>
+    <div className="min-h-screen bg-gray-100 relative">
       {selectedProduct !== null && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50" onClick={() => setSelectedProduct(null)}>
           <div className="container mx-auto flex items-center justify-center h-full">
-            <div className="bg-rose-300 p-4 rounded-lg shadow-lg">
+            <div className="bg-gray-200 p-4 rounded-lg shadow-lg">
               <h2 className="text-2xl font-bold text-black">{products[selectedProduct - 1].name}</h2>
               <div className="my-2">
                 <Image src={products[selectedProduct - 1].image} alt={products[selectedProduct - 1].name} width={300} height={300} />
               </div>
-              <div className="my-2 text-black">{products[selectedProduct - 1].description}</div>
+              <div className="my-2 text-gray-800">{products[selectedProduct - 1].description}</div>
               <div className="flex justify-center">
-                <button onClick={openWhatsApp} className="bg-green-300 rounded-lg p-2 text-black font-bold shadow-md">
+                <button onClick={openWhatsApp} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-md">
                   Agendar
                 </button>
               </div>
@@ -49,38 +108,37 @@ export default function Naildesign() {
           </div>
         </div>
       )}
-      <div className="bg-cover bg-center flex-grow z-10">
-        <header className="text-center text-3xl font-bold py-4 text-white">Tabela de Preços</header>
-        <div className="container mx-auto relative">
-          <div className="absolute inset-0  bg-opacity-50 backdrop-blur-sm"></div>
-          <div className="relative z-10">
-            {products.map((product: any) => (
-              <div
-                key={product.id}
-                onClick={() => setSelectedProduct(product.id)}
-                className="cursor-pointer mb-4"
-              >
-                <div className="border-b-2 border-solid border-gray-400 relative">
-                  <div className="flex justify-between items-center px-4">
-                    <div className="font-serif text-white">
-                      {product.name} <span className="text-xs text-gray-500">(Clique aqui)</span>
-                    </div>
-                    <div>
-                      <span className="text-green-500 font-bold">{product.price} USD</span>
-                    </div>
-                  </div>
-                </div>
+      <header className="text-center text-3xl font-bold py-4 text-white bg-gradient-to-r from-pink-500 to-red-500">Tabela de Preços</header>
+      <div className="container mx-auto py-8">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {Object.entries(groupedProducts).map(([category, products]) => (
+            <div key={category} className="bg-white rounded-lg shadow-md overflow-hidden">
+              <h2 className="text-xl font-bold py-2 px-4 bg-gradient-to-r from-pink-300 to-pink-500 text-white">{category}</h2>
+              <div className="p-4">
+              {products.map(product => (
+  <div
+    key={product.id}
+    onClick={() => setSelectedProduct(product.id)}
+    className="cursor-pointer border-b border-gray-200 py-4"
+  >
+    <div className="flex items-center justify-between">
+      <h3 className="text-lg font-bold text-gray-800">{product.name}</h3>
+      <p className="text-green-500 font-bold">R$ {product.price.toFixed(2)}</p>
+    </div>
+    <p className="text-gray-600">{product.description}</p>
+  </div>
+))}
+
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
-      <footer className="text-center py-2 text-xs text-black bg-rose-200 z-10">
+      <footer className="text-center py-2 text-xs text-white bg-gradient-to-r from-pink-500 to-red-500 fixed bottom-0 w-full">
         <div className="flex justify-center">
           <a href="https://facebook.com" className="mx-2 text-blue-700"><FaFacebook className="text-2xl" /></a>
-          
-          <a href="https://instagram.com" className="mx-2"><img src="/instagram-logo.svg" alt="Instagram" className="w-6 h-6" /></a>
-          <a href="https://wa.me/123456789" className="mx-2 text-green-500"><FaWhatsapp className="text-2xl" /></a>
+          <a href="https://instagram.com" className="mx-2"><FaInstagram className="text-2xl" /></a>
+          <a href="https://wa.me/123456789" className="mx-2"><FaWhatsapp className="text-2xl" /></a>
         </div>
       </footer>
     </div>

@@ -1,10 +1,15 @@
-import Image from "next/image";
-import NailDesignPrices from './components/naildesign';
+// Importações necessárias
+import React from 'react';
+import Naildesign from './components/naildesign'; // Importando o componente Naildesign
 
-export default function Home() {
+// Componente principal App
+function App() {
   return (
-   <>
-   <NailDesignPrices/>
-   </>
+    <div className="App">
+      <Naildesign /> {/* Renderizando o componente Naildesign */}
+    </div>
   );
 }
+
+// Exportando o componente App
+export default App;
