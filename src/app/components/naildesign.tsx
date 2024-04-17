@@ -9,15 +9,15 @@ const products = [
     category: "Blindagem",
     name: "Blindagem ",
     price: 80,
-    description: "Descrição da Blindagem ",
-    image: "/product1.jpg",
+    description: "",
+    image: "/back.jpg",
   },
   {
     id: 2,
     category: "Blindagem",
     name: "Blindagem Cutilage Russa + Esmaltação em Gel ",
     price: 80,
-    description: "Descrição da Blindagem Cutilage Russa + Esmaltação em Gel ",
+    description: "",
     image: "/product2.jpg",
   },
   {
@@ -25,7 +25,7 @@ const products = [
     category: "Banho de Gel",
     name: "Cutilagem ",
     price: 100,
-    description: "Descrição da Cutilagem ",
+    description: "",
     image: "/product3.jpg",
   },
   {
@@ -33,7 +33,7 @@ const products = [
     category: "Banho de Gel",
     name: "Esmaltação em Gel ",
     price: 100,
-    description: "Descrição da Esmaltação em Gel ",
+    description: "",
     image: "/product4.jpg",
   },
   {
@@ -41,7 +41,7 @@ const products = [
     category: "Extensor Molde F1",
     name: "Cutilagem Russa ",
     price: 170,
-    description: "Descrição da Cutilagem Russa ",
+    description: "",
     image: "/product5.jpg",
   },
   {
@@ -49,7 +49,7 @@ const products = [
     category: "Extensor Molde F1",
     name: "Esmaltação em Gel ",
     price: 170,
-    description: "Descrição da Esmaltação em Gel ",
+    description: "",
     image: "/product6.jpg",
   },
   {
@@ -57,7 +57,7 @@ const products = [
     category: "Extensor Fibra",
     name: "Cutilagem Russa ",
     price: 120,
-    description: "Descrição da Cutilagem Russa ",
+    description: "",
     image: "/product7.jpg",
   },
   {
@@ -65,7 +65,7 @@ const products = [
     category: "Extensor Fibra",
     name: "Esmaltação ",
     price: 120,
-    description: "Descrição da Esmaltação ",
+    description: "",
     image: "/product8.jpg",
   },
 ];
@@ -78,6 +78,10 @@ export default function Naildesign() {
     window.open(`https://wa.me/${whatsappNumber}`, "_blank");
   };
 
+  const toggleFullScreen = (imageUrl: string) => {
+    window.open(imageUrl, "_blank");
+  };
+
   const groupedProducts: { [key: string]: any[] } = products.reduce<{
     [key: string]: any[];
   }>((acc, product) => {
@@ -88,14 +92,13 @@ export default function Naildesign() {
   }, {});
 
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        backgroundImage: `url('/naild.jpg')`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <div className="min-h-screen relative">
+      <Image
+        src="/naild.jpg"
+        alt="Background Image"
+        layout="fill"
+        objectFit="cover"
+      />
       {selectedProduct !== null && (
         <div
           className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50"
@@ -106,12 +109,13 @@ export default function Naildesign() {
               <h2 className="text-2xl font-bold text-black">
                 {products[selectedProduct - 1].name}
               </h2>
-              <div className="my-2">
+              <div className="my-2" onClick={() => toggleFullScreen(products[selectedProduct - 1].image)}>
                 <Image
                   src={products[selectedProduct - 1].image}
                   alt={products[selectedProduct - 1].name}
                   width={300}
                   height={300}
+                  className="cursor-pointer"
                 />
               </div>
               <div className="my-2 text-gray-800">
