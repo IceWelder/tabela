@@ -1,7 +1,10 @@
-"use client";
+"use client"
 import React, { useState } from "react";
 import Image from "next/image";
-import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
+import Link from 'next/link'; // Importe o componente Link do Next.js
+import { FaTiktok } from 'react-icons/fa'; // Importe o ícone do TikTok
+
 
 const products = [
   {
@@ -26,7 +29,7 @@ const products = [
     name: "Manicure combinada + Esmaltação em Gel ",
     price: 170,
     description: "(Sem decoração)",
-    image: "/moldef1.jpg",
+    image: "/m1.jpg",
   },
   {
     id: 4,
@@ -124,7 +127,7 @@ export default function Naildesign() {
           </div>
         )}
         <div className="container mx-auto py-8">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
             {Object.entries(groupedProducts).map(([category, products]) => (
               <div
                 key={category}
@@ -160,15 +163,12 @@ export default function Naildesign() {
       <footer className="text-center py-2 text-xs text-white bg-gradient-to-r from-brown to-brown relative bg-brown mt-auto">
         <div className="absolute inset-0 bg-contrast-opacity"></div>
         <div className="flex justify-center">
-          <a href="https://facebook.com" className="mx-2">
-            <FaFacebook className="text-blue-700 text-2xl" />
-          </a>
-          <a href="https://instagram.com" className="mx-2">
-            <FaInstagram className="text-brown text-2xl" />
-          </a>
-          <a href="https://wa.me/123456789" className="mx-2">
-            <FaWhatsapp className="text-green-500 text-2xl" />
-          </a>
+          {/* Use o componente Link do Next.js corretamente */}
+          <Link className="mx-2" href="https://tiktok.com">
+            
+              <FaTiktok className="text-gray-700 text-2xl" />
+            
+          </Link>
         </div>
       </footer>
       <style jsx>{`
